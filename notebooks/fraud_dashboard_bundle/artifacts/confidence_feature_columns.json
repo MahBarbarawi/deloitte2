@@ -1,0 +1,13 @@
+[
+  "fraud_probability",
+  "predicted_fraud",
+  "decision_margin",
+  "entropy_certainty",
+  "tree_agreement",
+  "tree_probability_std",
+  "support__customer_previous_transaction_count",
+  "support__merchant_previous_transaction_count",
+  "support__category_previous_transaction_count",
+  "support__customer_merchant_previous_transaction_count",
+  "support__customer_category_previous_transaction_count"
+]

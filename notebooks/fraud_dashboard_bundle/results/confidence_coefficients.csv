@@ -1,0 +1,12 @@
+feature,coefficient,absolute_coefficient
+entropy_certainty,2.7074242859986746,2.7074242859986746
+decision_margin,1.9447884496877461,1.9447884496877461
+fraud_probability,-1.731138948855046,1.731138948855046
+predicted_fraud,-1.474013030158925,1.474013030158925
+tree_probability_std,-1.4511679842532885,1.4511679842532885
+tree_agreement,0.8776494847121582,0.8776494847121582
+support__customer_merchant_previous_transaction_count,0.8232145182900582,0.8232145182900582
+support__customer_category_previous_transaction_count,0.8158208463834302,0.8158208463834302
+support__merchant_previous_transaction_count,0.6118660263273118,0.6118660263273118
+support__category_previous_transaction_count,0.5491439900092477,0.5491439900092477
+support__customer_previous_transaction_count,0.3144739030282768,0.3144739030282768
