@@ -1,0 +1,86 @@
+{
+  "artifact_sha256": {
+    "best_rf_model.joblib": "01fa850329c4a81ed9604b1b034ad855bcfad1bf9d49d83fecb4e66d215c3741",
+    "confidence_feature_columns.json": "d720cafa26bfe8d4689cef16824ef0203ede371521e87ce765bdf884e95a66fd",
+    "confidence_model.joblib": "54ffc640a8fbdbceab99131ab25e93e30df812b2a4ff608955a7351020467c55",
+    "history_reference.json": "aff263af59b85d7661b21c3d2247008c173d5a0f60c9d27799de89928639f96a",
+    "model_config.json": "a4238912b186323a163628008343eb8433da6952ae6a300fe2d9ce6bbbee76e2",
+    "preprocessor.joblib": "5d630547eb788144552928d3c0b02e62c92da3b06920257126c011788b82f866",
+    "processed_feature_names.json": "be6530829baf1f8077a016a31aa0dc3eae54dfc4fabf72cad9e109bbfb9476ff",
+    "rf_feature_mask.npy": "0f14f4674ac62f5da92ac63e8b5666dd30f76bb18bfd0bce8812f069a5629e65",
+    "selected_feature_names.json": "a50d9009bb5800cacb1ecec9afafc2343975fc40794ad8d53305f37d6e7a30df"
+  },
+  "frozen_artifacts_unchanged": true,
+  "historical_result_note": "These saved result tables were generated before the structural refactor from data/transactions_clean.csv. That file is byte-identical to the cleaned dashboard CSV. The current reproducible entry point starts from data/fraud.csv and uses fraud_pipeline modules.",
+  "historical_source_sha256": "4abbfd8d4b63df37f6a4d63023161a7e65cc28ce702fed91d0b572f32a6e64df",
+  "notebook_feature_engineering_source": "notebooks/Untitled.ipynb",
+  "parameter_space": {
+    "max_depth": [
+      6,
+      8,
+      10,
+      12,
+      15,
+      20
+    ],
+    "max_features": [
+      "sqrt",
+      "log2",
+      0.5,
+      0.75
+    ],
+    "max_samples": [
+      0.6,
+      0.75,
+      0.9,
+      null
+    ],
+    "min_samples_leaf": [
+      1,
+      2,
+      5,
+      10,
+      20
+    ],
+    "min_samples_split": [
+      2,
+      5,
+      10,
+      20,
+      50
+    ],
+    "n_estimators": [
+      100,
+      150,
+      200,
+      300
+    ]
+  },
+  "source": "data/transactions_clean.csv",
+  "split": {
+    "test": [
+      153,
+      179
+    ],
+    "train": [
+      0,
+      125
+    ],
+    "validation": [
+      126,
+      152
+    ]
+  },
+  "tuning_config": {
+    "comparison_threshold": 0.5,
+    "gap_penalty": 0.5,
+    "max_f1_gap": 0.08,
+    "n_iterations": 25,
+    "random_state": 42
+  },
+  "variants": [
+    "legacy_baseline",
+    "corrected_simulation_day",
+    "no_direct_time"
+  ]
+}

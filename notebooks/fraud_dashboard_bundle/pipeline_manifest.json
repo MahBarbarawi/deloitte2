@@ -1,0 +1,94 @@
+{
+  "active_outputs": {
+    "dashboard_data": "notebooks/fraud_dashboard_bundle/data/dashboard_data.parquet",
+    "processed": "data/processed/transactions_clean.parquet",
+    "test_split": "data/splits/test.parquet",
+    "train_split": "data/splits/train.parquet",
+    "training_history": "notebooks/fraud_dashboard_bundle/data/training_history",
+    "validation_demo": "notebooks/fraud_dashboard_bundle/data/validation_demo.parquet",
+    "validation_split": "data/splits/validation.parquet"
+  },
+  "dashboard_schema_version": 2,
+  "dataset": {
+    "columns": [
+      "step",
+      "customer",
+      "age",
+      "gender",
+      "zipcodeOri",
+      "merchant",
+      "zipMerchant",
+      "category",
+      "amount",
+      "fraud"
+    ],
+    "rows": 594643,
+    "simulation_day_max": 179,
+    "simulation_day_min": 0,
+    "unique_simulation_days": 180
+  },
+  "history": {
+    "excluded_fields": [
+      "fraud"
+    ],
+    "pipeline_version": "2.0.0",
+    "purpose": "Label-free training history for dashboard Decision Evidence",
+    "schema_version": 2,
+    "source": "data/fraud.csv",
+    "source_sha256": "ae8a3ec9d0f5bc3bcb5f579b6c32b04c43c53e3ceb5541156a7756c6a1187daa",
+    "split_definition": "train=0-125; validation=126-152; test=153-179",
+    "tables": {
+      "categories.parquet": 15,
+      "customer_categories.parquet": 27212,
+      "customer_merchants.parquet": 37850,
+      "customers.parquet": 4111,
+      "merchants.parquet": 50
+    },
+    "training_row_count": 396332,
+    "training_step_max": 125,
+    "training_step_min": 0,
+    "training_unique_steps": 126
+  },
+  "legacy_research_only": [
+    "artifacts/confidence_model.joblib",
+    "artifacts/confidence_feature_columns.json",
+    "artifacts/history_reference.json",
+    "results/confidence_summary.csv",
+    "results/confidence_coefficients.csv",
+    "results/confidence_results.csv",
+    "results/confidence_by_prediction.csv"
+  ],
+  "pipeline_version": "2.0.0",
+  "source": "data/fraud.csv",
+  "source_sha256": "ae8a3ec9d0f5bc3bcb5f579b6c32b04c43c53e3ceb5541156a7756c6a1187daa",
+  "split_definition": "train=0-125; validation=126-152; test=153-179",
+  "splits": [
+    {
+      "fraud": 5040,
+      "fraud_rate": 0.01271661132585812,
+      "legitimate": 391292,
+      "rows": 396332,
+      "simulation_day_max": 125,
+      "simulation_day_min": 0,
+      "split": "train"
+    },
+    {
+      "fraud": 1080,
+      "fraud_rate": 0.010998635354502313,
+      "legitimate": 97114,
+      "rows": 98194,
+      "simulation_day_max": 152,
+      "simulation_day_min": 126,
+      "split": "validation"
+    },
+    {
+      "fraud": 1080,
+      "fraud_rate": 0.010787378766842794,
+      "legitimate": 99037,
+      "rows": 100117,
+      "simulation_day_max": 179,
+      "simulation_day_min": 153,
+      "split": "test"
+    }
+  ]
+}

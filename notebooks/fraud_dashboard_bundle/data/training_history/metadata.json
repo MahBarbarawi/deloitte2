@@ -1,0 +1,22 @@
+{
+  "excluded_fields": [
+    "fraud"
+  ],
+  "pipeline_version": "2.0.0",
+  "purpose": "Label-free training history for dashboard Decision Evidence",
+  "schema_version": 2,
+  "source": "data/fraud.csv",
+  "source_sha256": "ae8a3ec9d0f5bc3bcb5f579b6c32b04c43c53e3ceb5541156a7756c6a1187daa",
+  "split_definition": "train=0-125; validation=126-152; test=153-179",
+  "tables": {
+    "categories.parquet": 15,
+    "customer_categories.parquet": 27212,
+    "customer_merchants.parquet": 37850,
+    "customers.parquet": 4111,
+    "merchants.parquet": 50
+  },
+  "training_row_count": 396332,
+  "training_step_max": 125,
+  "training_step_min": 0,
+  "training_unique_steps": 126
+}
