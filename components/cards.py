@@ -12,7 +12,6 @@ from components.styles import (
     TEXT_PRIMARY as INK,
     WARNING as AMBER,
     apply_dashboard_style,
-    CONFIDENCE_COLORS,
 )
 
 
@@ -69,11 +68,3 @@ def flow_diagram(steps: list[str]) -> None:
 
 def section_rule() -> None:
     st.markdown('<hr class="section-rule">', unsafe_allow_html=True)
-
-
-def confidence_scale() -> None:
-    chips = "".join(
-        f'<div class="confidence-chip" style="--chip-color:{color}">{html.escape(label)}</div>'
-        for label, color in CONFIDENCE_COLORS.items()
-    )
-    st.markdown(f'<div class="confidence-scale">{chips}</div>', unsafe_allow_html=True)

@@ -10,12 +10,12 @@ configure_page("Model Development")
 page_header("Model Development", "A leakage-aware, chronological workflow produced the frozen model used by this application.", "METHODOLOGY")
 
 st.subheader("Development workflow")
-flow_diagram(["Data Cleaning", "EDA", "Historical Feature Engineering", "Leakage Validation", "Missing-History Handling", "Chronological Split", "Preprocessing", "Feature Selection", "Model Comparison", "RF Tuning", "Threshold Optimization", "Final Test", "Confidence Layer"])
-st.info("Historical features use only transactions where step < the current transaction step. Transactions in the same step never see one another.")
+flow_diagram(["Data Cleaning", "EDA", "Historical Feature Engineering", "Leakage Validation", "Missing-History Handling", "Chronological Split", "Preprocessing", "Feature Selection", "Model Comparison", "RF Tuning", "Threshold Optimization", "Final Test", "Decision Evidence"])
+st.info("Each step is one simulated day. Historical features use only transactions from earlier simulated days; transactions on the same day never see one another.")
 
 section_rule(); st.subheader("Feature engineering groups")
 groups = {
-    "Transaction": ["amount and log amount", "day", "hour"],
+    "Transaction": ["amount and log amount", "simulation chronology for leakage-safe splitting"],
     "Customer": ["historical transaction count", "total, average, standard deviation, min/max spend", "rolling activity", "velocity and recency"],
     "Merchant": ["historical volume and received amount", "average, standard deviation, min/max amount", "rolling activity and velocity"],
     "Category": ["historical volume and amount", "average, standard deviation, min/max amount", "rolling activity and velocity"],
@@ -46,8 +46,9 @@ fig=px.bar(plot,x="configuration",y=metric,color="model",barmode="group",title="
 fig.update_yaxes(tickformat=".1%",range=[max(0,plot[metric].min()-.08),min(1,plot[metric].max()+.03)])
 st.plotly_chart(style_figure(fig,430),use_container_width=True)
 st.success(f"Selected configuration: Random Forest + RF-selected {config['selected_feature_count']} features.")
+st.caption("The frozen preprocessing export contains legacy day/hour-derived columns from an incorrect interpretation of step. Neither legacy temporal column was selected by the final Random Forest feature mask; the frozen artifacts remain unchanged pending a reviewed comparison experiment.")
 
 section_rule()
 importance = load_result_csv("rf_feature_importance.csv")
 st.plotly_chart(feature_importance_chart(importance), use_container_width=True)
-st.caption("Global impurity-based importance describes the fitted fraud model. It is not a prediction-confidence measure and does not imply causality.")
+st.caption("Global impurity-based importance describes the fitted fraud model. It is not a transaction-level certainty measure and does not imply causality.")

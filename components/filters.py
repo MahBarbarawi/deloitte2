@@ -11,9 +11,7 @@ def fraud_analysis_filters() -> tuple[dict, int]:
     with st.sidebar:
         st.subheader("Page filters")
         step_min, step_max = options["step_min"], options["step_max"]
-        step_range = st.slider("Step / day range", step_min, step_max, (step_min, step_max))
-        hour_options = ["All"] + list(range(24))
-        hour = st.selectbox("Hour", hour_options)
+        step_range = st.slider("Simulated Day Range", step_min, step_max, (step_min, step_max))
         ages = list(options["ages"])
         selected_ages = st.multiselect("Age group", ages, default=[], placeholder="All age groups")
         genders = list(options["genders"])
@@ -26,7 +24,7 @@ def fraud_analysis_filters() -> tuple[dict, int]:
         top_n = st.slider("Top customers / merchants", 5, 30, 12)
 
     return {
-        "step_range": tuple(step_range), "hour": hour,
+        "step_range": tuple(step_range),
         "ages": tuple(selected_ages), "genders": tuple(selected_genders),
         "categories": tuple(selected_categories), "status": status,
         "amount_range": tuple(amount_range),

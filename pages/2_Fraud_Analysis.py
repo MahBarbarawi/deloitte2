@@ -39,18 +39,34 @@ with right:
     fig.update_layout(xaxis_title="Amount", yaxis_title="Transactions", legend_title="Status")
     st.plotly_chart(style_figure(fig, 360), use_container_width=True)
 
-section_rule(); st.subheader("Fraud over time")
+section_rule(); st.subheader("Daily activity")
 time = analysis["time"]
 metric = st.radio(
     "Time series metric",
-    ["Transaction count", "Fraud count", "Fraud rate"],
-    index=2,
+    ["Transaction Volume", "Fraud Rate", "Fraud Amount"],
+    index=1,
     horizontal=True,
 )
-metric_col = {"Transaction count":"transaction_count","Fraud count":"fraud_count","Fraud rate":"fraud_rate"}[metric]
-fig = px.line(time, x="step", y=metric_col, title=f"{metric} by step", color_discrete_sequence=[FRAUD if metric != "Transaction count" else BLUE])
-fig.update_yaxes(tickformat=".2%" if metric == "Fraud rate" else ",")
+metric_col = {"Transaction Volume":"transaction_count","Fraud Rate":"fraud_rate","Fraud Amount":"fraud_amount"}[metric]
+fig = px.line(
+    time,
+    x="step",
+    y=metric_col,
+    title=f"{metric} by Simulated Day",
+    labels={"step":"Simulated Day", metric_col:metric},
+    color_discrete_sequence=[BLUE if metric == "Transaction Volume" else FRAUD],
+)
+if metric == "Fraud Rate":
+    fig.update_traces(hovertemplate="Simulated Day: %{x}<br>Fraud Rate: %{y:.2%}<extra></extra>")
+    fig.update_yaxes(tickformat=".2%")
+elif metric == "Fraud Amount":
+    fig.update_traces(hovertemplate="Simulated Day: %{x}<br>Fraud Amount: %{y:,.2f}<extra></extra>")
+    fig.update_yaxes(tickformat=",")
+else:
+    fig.update_traces(hovertemplate="Simulated Day: %{x}<br>Transactions: %{y:,}<extra></extra>")
+    fig.update_yaxes(tickformat=",")
 st.plotly_chart(style_figure(fig), use_container_width=True)
+st.caption("BankSim contains exactly 40 fraudulent transactions per simulated day, so fraud volume is constant by construction.")
 
 section_rule(); st.subheader("Category")
 category = analysis["category"]

@@ -32,14 +32,12 @@ def grouped_fraud(data: pd.DataFrame, group: str) -> pd.DataFrame:
 
 @st.cache_data(show_spinner=False, max_entries=24)
 def build_fraud_analysis(
-    step_range: tuple[int, int], hour, ages: tuple[str, ...], genders: tuple[str, ...],
+    step_range: tuple[int, int], ages: tuple[str, ...], genders: tuple[str, ...],
     categories: tuple[str, ...], status: str, amount_range: tuple[float, float],
 ) -> dict[str, object]:
     """Filter once and return only compact, chart-ready aggregates."""
     data = load_dashboard_data()
     mask = data["step"].between(*step_range) & data["amount"].between(*amount_range)
-    if hour != "All":
-        mask &= (data["step"] % 24).eq(hour)
     if ages:
         mask &= data["age"].astype(str).isin(ages)
     if genders:
@@ -66,8 +64,11 @@ def build_fraud_analysis(
             "count": counts, "status": label,
         }))
     time = filtered.groupby("step", observed=True).agg(
-        transaction_count=("fraud", "size"), fraud_count=("fraud", "sum")
+        transaction_count=("fraud", "size"),
+        fraud_count=("fraud", "sum"),
     ).reset_index()
+    daily_fraud_amount = filtered.loc[filtered["fraud"].eq(1)].groupby("step", observed=True)["amount"].sum()
+    time["fraud_amount"] = daily_fraud_amount.reindex(time["step"], fill_value=0).to_numpy()
     time["fraud_rate"] = time["fraud_count"] / time["transaction_count"]
     return {
         "summary": summary,

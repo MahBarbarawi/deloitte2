@@ -48,34 +48,12 @@ def confusion_matrix(metrics: dict):
     return style_figure(fig, 420, False)
 
 
-def coefficient_chart(data: pd.DataFrame):
-    frame = data.sort_values("coefficient")
-    fig = px.bar(frame, x="coefficient", y="feature", orientation="h", color="coefficient",
-                 color_continuous_scale=[[0, FRAUD], [.5, "#52637A"], [1, SAFE]],
-                 title="Learned confidence factors")
-    fig.update_layout(coloraxis_showscale=False)
-    fig.add_vline(x=0, line_color=TEXT_SECONDARY)
-    return style_figure(fig, 470, False)
-
-
 def feature_importance_chart(data: pd.DataFrame, top_n: int = 20):
     frame = data.nlargest(top_n, "importance").sort_values("importance")
     frame = frame.assign(feature=frame["feature"].str.replace("numeric__", "", regex=False).str.replace("categorical__", "", regex=False))
     fig = px.bar(frame, x="importance", y="feature", orientation="h", title="Global Random Forest Feature Importance", color_discrete_sequence=[BLUE])
     fig.update_xaxes(tickformat=".1%", title="Mean decrease in impurity")
     return style_figure(fig, 580, False)
-
-
-def confidence_comparison(data: pd.DataFrame):
-    order = ["Low", "Medium", "High", "Very High"]
-    frame = data.copy(); frame["confidence_level"] = pd.Categorical(frame["confidence_level"], order, ordered=True)
-    frame = frame.sort_values("confidence_level")
-    fig = go.Figure()
-    fig.add_bar(x=frame["confidence_level"], y=frame["predicted_confidence"], name="Average predicted confidence", marker_color=BLUE)
-    fig.add_bar(x=frame["confidence_level"], y=frame["actual_accuracy"], name="Observed accuracy", marker_color=SAFE)
-    fig.update_layout(title="Predicted confidence vs observed accuracy", barmode="group")
-    fig.update_yaxes(tickformat=".0%", range=[0.6, 1.01])
-    return style_figure(fig)
 
 
 def empty_chart(message: str):

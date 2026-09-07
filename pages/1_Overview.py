@@ -6,7 +6,7 @@ from utils.data_loader import load_dashboard_summary, load_result_json
 from utils.formatting import percent
 
 configure_page("Overview")
-page_header("Fraud Detection & Risk Intelligence", "Transaction-level fraud analysis, model evaluation, and confidence-aware decision support.", "EXECUTIVE OVERVIEW")
+page_header("Fraud Detection & Risk Intelligence", "Transaction-level fraud analysis, model evaluation, and interpretable decision evidence.", "EXECUTIVE OVERVIEW")
 
 summary = load_dashboard_summary()
 config = load_model_config()
@@ -34,7 +34,7 @@ for col, (label, key, note) in zip(cols, [
 
 section_rule()
 st.subheader("Decision pipeline")
-flow_diagram(["Transaction", "Behavioral Feature Engineering", "Preprocessing", "Feature Selection", "Random Forest", "Fraud Score", "Decision Threshold", "Fraud / Non-Fraud", "Confidence Layer"])
+flow_diagram(["Transaction", "Behavioral Feature Engineering", "Preprocessing", "Feature Selection", "Random Forest", "Fraud Score", "Decision Threshold", "Fraud / Non-Fraud", "Decision Evidence"])
 
 st.subheader("How to read the metrics")
 cols = st.columns(2)

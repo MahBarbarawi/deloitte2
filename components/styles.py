@@ -17,14 +17,6 @@ FRAUD = "#FF6678"
 NON_FRAUD = POSITIVE
 PURPLE = "#B397F2"
 
-CONFIDENCE_COLORS = {
-    "Low": FRAUD,
-    "Medium": WARNING,
-    "High": ACCENT,
-    "Very High": POSITIVE,
-}
-
-
 def apply_dashboard_style() -> None:
     """Apply explicit component styling on top of the Streamlit theme."""
     st.markdown(
@@ -80,13 +72,9 @@ def apply_dashboard_style() -> None:
         .flow-node {{ background:var(--card-bg); border:1px solid var(--border); border-radius:10px;
           padding:.65rem .85rem; font-size:.82rem; font-weight:650; color:var(--text-1); }}
         .flow-arrow {{ color:var(--text-muted); font-size:1rem; }}
-        .confidence-scale {{ display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:.55rem; margin:.8rem 0 1.2rem; }}
-        .confidence-chip {{ background:var(--card-bg); border:1px solid var(--border); border-top:3px solid var(--chip-color);
-          border-radius:9px; padding:.65rem .75rem; color:var(--text-1); font-weight:700; text-align:center; }}
         div[data-testid="stPlotlyChart"] {{ background:var(--card-bg); border:1px solid var(--border); border-radius:14px; padding:.3rem; }}
         [data-testid="stAlert"] {{ color: var(--text-1); border: 1px solid var(--border); }}
         button[kind="primary"], button[kind="secondary"] {{ border-color: var(--border) !important; }}
-        @media (max-width: 900px) {{ .confidence-scale {{ grid-template-columns:repeat(2,minmax(0,1fr)); }} }}
         </style>
         """,
         unsafe_allow_html=True,

@@ -67,7 +67,7 @@ with st.expander("Validation error details"):
       fp=demo[(demo.actual_fraud.eq(0)) & (demo.prediction.eq(1))]
       fn=demo[(demo.actual_fraud.eq(1)) & (demo.prediction.eq(0))]
       tab1,tab2=st.tabs([f"False positives ({len(fp):,})",f"False negatives ({len(fn):,})"])
-      show=["source_index","step","customer","merchant","category","amount","fraud_probability","prediction_confidence"]
-      with tab1:st.dataframe(fp[show].head(100),hide_index=True,use_container_width=True)
-      with tab2:st.dataframe(fn[show].head(100),hide_index=True,use_container_width=True)
+      show=["source_index","step","customer","merchant","category","amount","fraud_probability"]
+      with tab1:st.dataframe(fp[show].head(100).rename(columns={"step":"simulation_day"}),hide_index=True,use_container_width=True)
+      with tab2:st.dataframe(fn[show].head(100).rename(columns={"step":"simulation_day"}),hide_index=True,use_container_width=True)
       st.caption("False negatives deserve particular attention because each represents missed fraud. Tables show up to 100 exported validation examples.")
